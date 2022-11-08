@@ -90,8 +90,25 @@ class Auth:
             time.sleep(40)
             return 'x'
         else:
-            print(F"{Fore.RED}[ERROR] {Fore.RESET} {self.username}:{self.password}")
-            pass
+            ver_code = input(F'{Fore.GREEN}2FA Auth Enabled{Fore.RESET}. Enter the verification code: \n')
+            authdata = {
+                'type': 'multifactor',
+                'code': ver_code,
+            }
+            r = self.session.put(url=URLS.AUTH_URL, json=authdata)
+            data = r.json()
+            if "access_token" in r.text:
+                pattern = compile('access_token=((?:[a-zA-Z]|\d|\.|-|_)*).*id_token=((?:[a-zA-Z]|\d|\.|-|_)*).*expires_in=(\d*)')
+                data = pattern.findall(data['response']['parameters']['uri'])[0]
+                token = data[0]
+                token_id = data[1]
+                return [token,token_id]
+
+            elif "auth_failure" in r.text:
+                print(F"{Fore.RED}[ERROR] {Fore.RESET} {self.username}:{self.password}") # banned (?)
+            else:
+                print(F"{Fore.RED}[ERROR] {Fore.RESET} {self.username}:{self.password}")
+
 
     def get_entitlement_token(self):
         r = self.session.post(URLS.ENTITLEMENT_URL, json={})
