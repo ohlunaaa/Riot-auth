@@ -1,5 +1,5 @@
 <h1 align="center">
-  Riot-auth
+  Riot-auth for updated code https://github.com/ohlunaaa/Valorant-auth
 </h1>
 
 <p align="center">
