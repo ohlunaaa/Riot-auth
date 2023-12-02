@@ -7,7 +7,7 @@
 </p>
 
 <h4 align="center">
-  <a href="https://discord.gg/fTmJmasvMm">🌌・Discord</a>
+  <a href="https://discord.gg/KvJP5VKd">🌌・Discord</a>
 </h4>
 
 <p align="center">
